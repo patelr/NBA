@@ -1,0 +1,14 @@
+<resources>
+  <string name="app_name">NBA</string>
+  <string name="title_item_detail">Item Detail</string>
+  <string name="sort">Sort</string>
+  <string name="sort_by">Sort By</string>
+  <string-array name="sort_option">
+    <item>Wins Asc</item>
+    <item>Wins Desc</item>
+    <item>Losses Asc</item>
+    <item>Losses Desc</item>
+    <item>Name Asc</item>
+    <item>Name Desc</item>
+  </string-array>
+</resources>
