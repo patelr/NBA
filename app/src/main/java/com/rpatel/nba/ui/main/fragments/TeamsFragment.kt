@@ -7,13 +7,11 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import com.rpatel.nba.R
-import com.rpatel.nba.di.AppModule
 import com.rpatel.nba.domain.entity.DataItem
 import com.rpatel.nba.domain.entity.TeamData.Team
 import com.rpatel.nba.ui.adapters.DataAdapter
 import com.rpatel.nba.ui.adapters.viewholders.BaseViewHolder
 import com.rpatel.nba.ui.adapters.viewholders.TeamViewHolder
-import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.AndroidSupportInjection
@@ -33,6 +31,7 @@ class TeamsFragment: Fragment(), TeamListContract.View, HasSupportFragmentInject
 
   private var teamsList: List<Team> = emptyList()
 
+  @Suppress("UNCHECKED_CAST")
   private val adapter: DataAdapter by lazy {
     object: DataAdapter() {
       override fun provideViewHolder(dateItemType: Int, parent: ViewGroup): BaseViewHolder<DataItem> {

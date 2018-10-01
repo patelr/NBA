@@ -8,7 +8,6 @@ import com.rpatel.nba.domain.provider.NBAGatewayProviderImpl
 import com.rpatel.nba.domain.provider.Timeout
 import com.rpatel.nba.domain.usecase.GetTeamsUseCase
 import com.rpatel.nba.domain.usecase.GetTeamsUseCaseImpl
-import com.rpatel.nba.ui.main.fragments.TeamsFragmentPresenter
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

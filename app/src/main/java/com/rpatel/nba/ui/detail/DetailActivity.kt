@@ -28,6 +28,7 @@ class DetailActivity : AppCompatActivity() {
     }
   }
 
+  @Suppress("UNCHECKED_CAST")
   private val adapter: DataAdapter by lazy {
     object: DataAdapter() {
       override fun provideViewHolder(dateItemType: Int, parent: ViewGroup)

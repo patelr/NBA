@@ -86,7 +86,7 @@ class TeamsFragmentPresenter (private val getTeamsUseCase: GetTeamsUseCase,
           })
     }.subscribeOn(scheduler)
     .observeOn(mainScheduler)
-    .subscribe { sortedTeams, t2 ->
+    .subscribe { sortedTeams, _ ->
       view.updateTeams(sortedTeams)
     }.also {
       compositeDisposable.add(it)
