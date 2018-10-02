@@ -17,6 +17,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.item_list.*
+import kotlinx.android.synthetic.main.teams_fragment.*
 import javax.inject.Inject
 
 class TeamsFragment: Fragment(), TeamListContract.View, HasSupportFragmentInjector {
@@ -42,7 +43,7 @@ class TeamsFragment: Fragment(), TeamListContract.View, HasSupportFragmentInject
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     setHasOptionsMenu(true)
-    return inflater.inflate(R.layout.item_list, container, false)
+    return inflater.inflate(R.layout.teams_fragment, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,11 +72,11 @@ class TeamsFragment: Fragment(), TeamListContract.View, HasSupportFragmentInject
   }
 
   override fun showProgress() {
-    Log.d("TAG", "showProgress")
+    teamsProgress.visibility = View.VISIBLE
   }
 
   override fun hideProgress() {
-    Log.d("TAG", "hideProgress")
+    teamsProgress.visibility = View.GONE
   }
 
   override fun updateTeams(teams: List<Team>) {
