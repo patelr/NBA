@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import com.rpatel.nba.R
 import com.rpatel.nba.domain.entity.DataItem
 import com.rpatel.nba.domain.entity.TeamData.Team
@@ -109,5 +110,9 @@ class TeamsFragment: Fragment(), TeamListContract.View, HasSupportFragmentInject
 
   override fun supportFragmentInjector(): AndroidInjector<Fragment> {
     return childFragmentInjector
+  }
+
+  override fun showError(error: Throwable) {
+    Toast.makeText(context, error.localizedMessage, Toast.LENGTH_SHORT).show()
   }
 }

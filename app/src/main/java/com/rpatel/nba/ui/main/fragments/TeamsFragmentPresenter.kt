@@ -17,6 +17,7 @@ interface TeamListContract {
     fun showProgress()
     fun hideProgress()
     fun updateTeams(teams: List<Team>)
+    fun showError(error: Throwable)
   }
 
   interface Presenter {
@@ -47,12 +48,11 @@ class TeamsFragmentPresenter (private val getTeamsUseCase: GetTeamsUseCase,
         .subscribe { teams, e ->
           view.hideProgress()
           e?.let {
-            it.printStackTrace()
+            view.showError(it)
             return@subscribe
           }
           this.teams = teams
           sortBy(4)
-          //view.updateTeams(teams)
         }.also {
           compositeDisposable.add(it)
         }
@@ -86,8 +86,10 @@ class TeamsFragmentPresenter (private val getTeamsUseCase: GetTeamsUseCase,
           })
     }.subscribeOn(scheduler)
     .observeOn(mainScheduler)
+    .doOnSubscribe { view.showProgress() }
     .subscribe { sortedTeams, _ ->
       view.updateTeams(sortedTeams)
+      view.hideProgress()
     }.also {
       compositeDisposable.add(it)
     }

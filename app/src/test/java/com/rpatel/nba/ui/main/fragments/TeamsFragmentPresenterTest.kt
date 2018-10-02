@@ -36,9 +36,9 @@ class TeamsFragmentPresenterTest {
     getTeamsUseCase = GetTeamsUseCaseSuccessStub(teams)
     presenter.attachView(view)
     presenter.loadTeams()
-    verify(view, times(1)).updateTeams(teams)
-    verify(view, times(1)).showProgress()
-    verify(view, times(1)).hideProgress()
+    verify(view, times(1)).updateTeams(teams.sortedBy { it.fullName })
+    verify(view, times(2)).showProgress()
+    verify(view, times(2)).hideProgress()
   }
 
   @Test
@@ -61,7 +61,7 @@ class TeamsFragmentPresenterTest {
     presenter.attachView(view)
 
     presenter.loadTeams()
-    verify(view, times(1)).updateTeams(teams)
+    verify(view, times(1)).updateTeams(teams.sortedBy { it.fullName })
 
     reset(view)
     presenter.sortBy(0)
@@ -107,6 +107,8 @@ class TeamsFragmentPresenterTest {
     override fun showProgress() {}
 
     override fun hideProgress() {}
+
+    override fun showError(error: Throwable) {}
   }
 
   private val raptor39 = TeamData.Player(id = 32123,

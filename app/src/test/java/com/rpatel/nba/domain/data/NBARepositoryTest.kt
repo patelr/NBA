@@ -5,6 +5,7 @@ import com.rpatel.nba.di.AppModule
 import com.rpatel.nba.domain.entity.TeamData.Player
 import com.rpatel.nba.domain.entity.TeamData.Team
 import com.rpatel.nba.domain.provider.NBAGatewayProvider
+import com.rpatel.nba.domain.provider.NBAGatewayProviderImpl
 import com.rpatel.nba.domain.provider.Timeout
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
@@ -21,7 +22,7 @@ class NBARepositoryTest {
     AppModule()
   }
 
-  private var timeout: Timeout? = null
+  private var timeout: Timeout = Timeout.NONE()
   private val baseUrl: String by lazy {
     "http://${mockWebServer.hostName}:${mockWebServer.port}"
   }
@@ -34,7 +35,7 @@ class NBARepositoryTest {
   }
 
   private val gateway: NBAGatewayProvider by lazy {
-    AppModule().provideNBAGatewayProvider(baseUrl, okHttpClient)
+    NBAGatewayProviderImpl(baseUrl, okHttpClient)
   }
 
   @Before
