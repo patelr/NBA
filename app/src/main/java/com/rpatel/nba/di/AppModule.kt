@@ -1,29 +1,39 @@
 package com.rpatel.nba.di
 
-import com.rpatel.nba.domain.data.NBARepository
-import com.rpatel.nba.domain.data.NBARepositoryImpl
 import com.rpatel.nba.domain.gateway.NBAGateway
-import com.rpatel.nba.domain.provider.NBAGatewayProvider
-import com.rpatel.nba.domain.provider.NBAGatewayProviderImpl
 import com.rpatel.nba.domain.provider.Timeout
-import com.rpatel.nba.domain.usecase.GetTeamsUseCase
-import com.rpatel.nba.domain.usecase.GetTeamsUseCaseImpl
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
+import javax.inject.Named
 
 @Module
 class AppModule {
 
     @Provides
-    fun provideTimeout(): Timeout {
-      return Timeout.NONE()
+    @Named("scheduler")
+    fun provideScheduler(): Scheduler {
+      return Schedulers.io()
     }
 
     @Provides
-    fun provideNBAGatewayProvider(okHttpClient: OkHttpClient)
-        : NBAGatewayProvider {
-      return NBAGatewayProviderImpl(NBAGateway.BASE_URL, okHttpClient)
+    @Named("mainScheduler")
+    fun provideMainScheduler(): Scheduler {
+      return AndroidSchedulers.mainThread()
+    }
+
+    @Provides
+    @Named("nba_base_url")
+    fun provideNBABaseUrl(): String {
+      return NBAGateway.BASE_URL
+    }
+
+    @Provides
+    fun provideTimeout(): Timeout {
+      return Timeout.NONE()
     }
 
     @Provides
@@ -35,15 +45,5 @@ class AppModule {
         okHttpBuilder.writeTimeout(timeout.timeoutDuration, timeout.timeoutUnit)
       }
       return okHttpBuilder.build()
-    }
-
-    @Provides
-    fun provideGetTeamsUseCase(nbaRepository: NBARepository): GetTeamsUseCase {
-      return GetTeamsUseCaseImpl(nbaRepository)
-    }
-
-    @Provides
-    fun provideNBARepository(nbaGatewayProvider: NBAGatewayProvider): NBARepository {
-      return NBARepositoryImpl(nbaGatewayProvider)
     }
 }

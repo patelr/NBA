@@ -8,6 +8,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Named
 
 @AllOpen
 
@@ -15,7 +16,7 @@ interface NBAGatewayProvider {
   fun provideNBAGateway(): NBAGateway
 }
 
-class NBAGatewayProviderImpl @Inject constructor(private val baseUrl: String,
+class NBAGatewayProviderImpl @Inject constructor(@Named("nba_base_url") private val baseUrl: String,
                                                  private val okHttpClient: OkHttpClient): NBAGatewayProvider {
 
   override fun provideNBAGateway(): NBAGateway {

@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_list.*
 
+
 class DetailActivity : AppCompatActivity() {
 
   companion object {

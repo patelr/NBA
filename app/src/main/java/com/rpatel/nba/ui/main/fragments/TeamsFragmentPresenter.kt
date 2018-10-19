@@ -8,6 +8,8 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
+import javax.inject.Named
 
 @AllOpen
 
@@ -28,9 +30,9 @@ interface TeamListContract {
   }
 }
 
-class TeamsFragmentPresenter (private val getTeamsUseCase: GetTeamsUseCase,
-                              private val scheduler: Scheduler = Schedulers.io(),
-                              private val mainScheduler: Scheduler = AndroidSchedulers.mainThread())
+class TeamsFragmentPresenter @Inject constructor(private val getTeamsUseCase: GetTeamsUseCase,
+                                                 @Named("scheduler") private val scheduler: Scheduler = Schedulers.io(),
+                                                 @Named("mainScheduler") private val mainScheduler: Scheduler = AndroidSchedulers.mainThread())
   : TeamListContract.Presenter {
 
   private val compositeDisposable = CompositeDisposable()

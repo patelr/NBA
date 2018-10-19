@@ -1,6 +1,9 @@
 package com.rpatel.nba.di
 
 import com.rpatel.nba.NBAApplication
+import com.rpatel.nba.domain.provider.NBAGatewayProvider
+import com.rpatel.nba.domain.provider.NBAGatewayProviderImpl
+import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -26,5 +29,6 @@ interface AppComponent: AndroidInjector<DaggerApplication> {
   }
 
   fun inject(app: NBAApplication)
+
 }
 
